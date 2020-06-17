@@ -16,8 +16,6 @@ public class TicTacToeMain {
 
         printGameBoard(gameBoard);
 
-
-
         while (true) {
             Scanner scan = new Scanner(System.in);
 
@@ -30,12 +28,16 @@ public class TicTacToeMain {
             }
 
             placePiece(gameBoard, playerPos, "player");
+            String result = checkWinner();
+            if (result.length() > 0) {
+                System.out.println(result);
+                break;
+            }
 
 //          CPU player code
             Random random = new Random();
             int cpuPos = random.nextInt(9) + 1;
             while (playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)) {
-                System.out.println("Position Taken! Enter a correct Position");
                 cpuPos = random.nextInt(9) + 1;
             }
 
@@ -43,10 +45,13 @@ public class TicTacToeMain {
 
             printGameBoard(gameBoard);
 
-            String result = checkWinner();
+            result = checkWinner();
+            if (result.length() > 0) {
+                System.out.println(result);
+                break;
+            }
             System.out.println(result);
         }
-
     }
     public static void printGameBoard(String[] [] gameBoard)  {
         for (String[] row : gameBoard) {
@@ -55,7 +60,6 @@ public class TicTacToeMain {
             }
             System.out.println();
         }
-
     }
 
     public static void placePiece(String[] [] gameBoard, int pos, String user) {
@@ -69,7 +73,6 @@ public class TicTacToeMain {
             symbol = "O";
             cpuPositions.add(pos);
         }
-
 
         switch(pos) {
             case 1:
@@ -120,7 +123,6 @@ public class TicTacToeMain {
         List cross1 = Arrays.asList(1, 5, 9);
         List cross2 = Arrays.asList(7, 5, 3);
 
-
 //        Here we are making a list of the lists above
         List<List> winningPositions = new ArrayList<List>();
         winningPositions.add(topRow);
@@ -142,7 +144,6 @@ public class TicTacToeMain {
                 return "CAT!!";
             }
         }
-
         return "";
     }
 }
