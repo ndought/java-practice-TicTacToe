@@ -3,6 +3,8 @@ import java.util.*;
 public class TicTacToeMain {
 
     static ArrayList<Integer> playerPositions = new ArrayList<Integer>();
+    static ArrayList<Integer> cpuPositions = new ArrayList<Integer>();
+
 
     public static void main(String[] args) {
 
@@ -22,14 +24,27 @@ public class TicTacToeMain {
 //          Human player code
             System.out.println("Enter your placement (1-9):");
             int playerPos = scan.nextInt();
+            while (playerPositions.contains(playerPos) || cpuPositions.contains(playerPositions)) {
+                System.out.println("Position Taken! Enter a correct Position");
+                playerPos = scan.nextInt();
+            }
+
             placePiece(gameBoard, playerPos, "player");
 
 //          CPU player code
             Random random = new Random();
             int cpuPos = random.nextInt(9) + 1;
+            while (playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)) {
+                System.out.println("Position Taken! Enter a correct Position");
+                cpuPos = random.nextInt(9) + 1;
+            }
+
             placePiece(gameBoard, cpuPos, "cpu");
 
             printGameBoard(gameBoard);
+
+            String result = checkWinner();
+            System.out.println(result);
         }
 
     }
@@ -49,8 +64,10 @@ public class TicTacToeMain {
 
         if (user.equals("player")) {
             symbol = "X";
+            playerPositions.add(pos);
         } else if (user.equals("cpu")) {
             symbol = "O";
+            cpuPositions.add(pos);
         }
 
 
@@ -104,10 +121,29 @@ public class TicTacToeMain {
         List cross2 = Arrays.asList(7, 5, 3);
 
 
+//        Here we are making a list of the lists above
+        List<List> winningPositions = new ArrayList<List>();
+        winningPositions.add(topRow);
+        winningPositions.add(midRow);
+        winningPositions.add(botRow);
+        winningPositions.add(leftCol);
+        winningPositions.add(midCol);
+        winningPositions.add(rightCol);
+        winningPositions.add(cross1);
+        winningPositions.add(cross2);
+
+//        Lists are related to collections which is why we can use containsAll(collections)
+        for (List l : winningPositions) {
+            if (playerPositions.containsAll(l)) {
+                return "Congratulations you won!";
+            } else if (cpuPositions.containsAll(l)) {
+                return "CPU wins! Sorry!! :( ";
+            } else if (playerPositions.size() + cpuPositions.size() == 9) {
+                return "CAT!!";
+            }
+        }
+
         return "";
     }
 }
 
-//{' ', '|', ' ', '|', ' '},
-//        {'-', '+', '-', '+', '-'},
-//        {' ', '|', ' ', '|', ' '}};
