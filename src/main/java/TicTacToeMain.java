@@ -18,40 +18,7 @@ public class TicTacToeMain {
 
         System.out.println(pos);
 
-        switch(pos) {
-            case 1:
-                gameBoard[0] [1] = "x";
-                break;
-            case 2:
-                gameBoard[0] [5] = "x";
-                break;
-            case 3:
-                gameBoard[0] [9] = "x";
-                break;
-            case 4:
-                gameBoard[2] [1] = "x";
-                break;
-            case 5:
-                gameBoard[2] [5] = "x";
-                break;
-            case 6:
-                gameBoard[2] [9] = "x";
-                break;
-            case 7:
-                gameBoard[4] [1] = "x";
-                break;
-            case 8:
-                gameBoard[4] [5] = "x";
-                break;
-            case 9:
-                gameBoard[4] [9] = "x";
-                break;
-        }
-
         printGameBoard(gameBoard);
-
-
-
 
     }
     public static void printGameBoard(String[] [] gameBoard)  {
@@ -62,6 +29,48 @@ public class TicTacToeMain {
             System.out.println();
         }
 
+    }
+
+    public static void placePiece(String[] [] gameBoard, int pos, String user) {
+
+        String symbol = "X";
+
+        if (user.equals("player")) {
+            symbol = "X";
+        } else if (user.equals("cpu")) {
+            symbol = "O";
+        }
+
+
+        switch(pos) {
+            case 1:
+                gameBoard[0] [1] = symbol;
+                break;
+            case 2:
+                gameBoard[0] [5] = symbol;
+                break;
+            case 3:
+                gameBoard[0] [9] = symbol;
+                break;
+            case 4:
+                gameBoard[2] [1] = symbol;
+                break;
+            case 5:
+                gameBoard[2] [5] = symbol;
+                break;
+            case 6:
+                gameBoard[2] [9] = symbol;
+                break;
+            case 7:
+                gameBoard[4] [1] = symbol;
+                break;
+            case 8:
+                gameBoard[4] [5] = symbol;
+                break;
+            case 9:
+                gameBoard[4] [9] = symbol;
+                break;
+        }
     }
 }
 
